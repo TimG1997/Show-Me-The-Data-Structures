@@ -4,6 +4,9 @@ from collections import OrderedDict
 class LRUCache(object):
 
     def __init__(self, capacity):
+        if capacity is None or capacity <= 0:
+            raise ValueError("Please provide a capacity not equal to NULL and greater than zero")
+
         self.ordered_dict = OrderedDict()
         self.capacity = capacity
 

@@ -20,3 +20,7 @@ class LRUCacheTest(unittest.TestCase):
         cache.set(6, 6)
 
         self.assertEqual(-1, cache.get(3))
+
+    def test_edge_cases_capacity(self):
+        self.assertRaises(ValueError, LRUCache, -1)
+        self.assertRaises(ValueError, LRUCache, None)
