@@ -18,12 +18,19 @@ class Node:
 
 
 def huffman_encoding(data):
+    if data is None or len(data) <= 0:
+        raise ValueError("You to provide non-empty data when encoding")
+
     character_frequencies = get_character_frequencies(data)
     queue = create_asc_freq_queue(character_frequencies)
     root_node = build_huffman_tree(queue)
 
     huffman_dict = {}
-    fill_huffman_dict(root_node, huffman_dict)
+    if len(character_frequencies) > 1:
+        fill_huffman_dict(root_node, huffman_dict)
+    else:
+        # edge case if only one repeating character exists
+        huffman_dict[root_node.character] = '0'
 
     encoded_str = ""
 
@@ -34,11 +41,9 @@ def huffman_encoding(data):
 
 
 def build_huffman_tree(queue):
+
     while queue.qsize() > 1:
         new_node = Node()
-
-        if (queue.qsize() <= 1):
-            break
 
         _, left = queue.get()
         _, right = queue.get()
@@ -48,7 +53,9 @@ def build_huffman_tree(queue):
         new_node.frequency = left.frequency + right.frequency
 
         queue.put((new_node.frequency, new_node))
+
     _, root_node = queue.get()
+
     return root_node
 
 
@@ -81,7 +88,20 @@ def get_character_frequencies(data):
 
 
 def huffman_decoding(data, tree):
+    if tree is None:
+        raise ValueError("You to provide a tree to decode the data")
+
+    if data is None or len(data) <= 0:
+        raise ValueError("You have to provide non-empty data when decoding")
+
     decoded_str = ""
+
+    # edge case if only one repeating character exists
+
+    if tree.left is None and tree.right is None:
+        for number in range(len(data)):
+            decoded_str += tree.character
+        return decoded_str
 
     curr_node = tree
 
