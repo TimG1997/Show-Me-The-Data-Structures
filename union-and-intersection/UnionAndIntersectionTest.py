@@ -42,3 +42,38 @@ class UnionAndIntersectionTest(unittest.TestCase):
         self.assertTrue(intersection_list.contains(4))
         self.assertTrue(intersection_list.contains(21))
         self.assertTrue(intersection_list.contains(6))
+
+    def test_edge_case_intersection_if_one_list_is_empty(self):
+        filled_list = LinkedList()
+        filled_list.append_all([1, 2, 3])
+
+        empty_list = LinkedList()
+
+        intersection_list = intersection(filled_list, empty_list)
+        self.assertEqual(0, len(intersection_list))
+
+    def test_edge_case_intersection_if_both_lists_are_empty(self):
+        empty_list_one = LinkedList()
+        empty_list_two = LinkedList()
+
+        intersection_list = intersection(empty_list_one, empty_list_two)
+        self.assertEqual(0, len(intersection_list))
+
+    def test_edge_case_union_if_one_list_is_empty(self):
+        filled_list = LinkedList()
+        filled_list.append_all([1, 2, 3])
+
+        empty_list = LinkedList()
+
+        union_list = union(filled_list, empty_list)
+        self.assertEqual(3, len(union_list))
+        self.assertTrue(union_list.contains(1))
+        self.assertTrue(union_list.contains(2))
+        self.assertTrue(union_list.contains(3))
+
+    def test_edge_case_union_if_both_lists_are_empty(self):
+        empty_list_one = LinkedList()
+        empty_list_two = LinkedList()
+
+        union_list = union(empty_list_one, empty_list_one)
+        self.assertEqual(0, len(union_list))
