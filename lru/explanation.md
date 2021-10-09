@@ -12,3 +12,7 @@ The OrderedDict also allows removing elements at an arbitrary position in O(1), 
 So everytime, when an element is retrieved from the cache it gets deleted and inserted again, which ensures, that the last used element is at the end of the OrderedDict and the least recently used one is at the front.
 
 If the capacity is full and a new element is inserted the first element in the OrderedDict (= the least recently used one) will get removed to make space for the new element.
+
+### Space complexity
+
+The space complexity is O(n), where n are the elements in the dictionary (and the queue)
