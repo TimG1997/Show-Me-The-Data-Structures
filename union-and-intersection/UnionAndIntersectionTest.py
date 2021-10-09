@@ -75,5 +75,5 @@ class UnionAndIntersectionTest(unittest.TestCase):
         empty_list_one = LinkedList()
         empty_list_two = LinkedList()
 
-        union_list = union(empty_list_one, empty_list_one)
+        union_list = union(empty_list_one, empty_list_two)
         self.assertEqual(0, len(union_list))
