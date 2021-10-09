@@ -19,8 +19,8 @@ class Blockchain:
         self.size = 0
 
     def append_block(self, data):
-        if data is None:
-            return
+        if data is None or len(data) <= 0:
+            raise ValueError("You have to provide non-empty data")
 
         new_block = Block(time.time(), data, None)
 
