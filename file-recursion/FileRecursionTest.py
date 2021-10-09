@@ -11,3 +11,9 @@ class FileRecursionTest(unittest.TestCase):
         self.assertIn('./testdir/t1.c', file_paths)
         self.assertIn('./testdir/subdir5/a.c', file_paths)
         self.assertIn('./testdir/subdir1/a.c', file_paths)
+
+    def test_edge_case_path_is_empty(self):
+        self.assertRaises(ValueError, find_files, '.c', '')
+
+    def test_edge_case_path_is_None(self):
+        self.assertRaises(ValueError, find_files, '.c', None)

@@ -2,6 +2,12 @@ import os
 
 
 def find_files(suffix, path):
+    if path is None or len(path) <= 0:
+        raise ValueError("You have to provide a non-empty path")
+
+    if not os.path.isfile(path) and not os.path.isdir(path):
+        raise ValueError("You have to provide a file or directory path")
+
     return find_files_helper(suffix, path)
 
 
